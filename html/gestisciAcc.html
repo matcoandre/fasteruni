@@ -1,0 +1,147 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Gestione account - FasterUni
+  </title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="../js/script.js"></script>
+
+  <link rel="icon" type="image/png" href="../media/logos/app_colored.png">
+
+  <style type="text/tailwindcss">
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      /* footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      } */
+
+      button
+      {
+        @apply text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-10 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1 placeholder-white
+      }
+
+      ::placeholder, option
+      {
+        @apply text-center
+      }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body id="background" class="min-h-screen h-full flex flex-col items-center justify-center bg-cover" background="../media/1.jpg">
+  <main class="max-w-lg w-full shadow-xl drop-shadow-xl rounded-xl bg-white dark:bg-neutral-900 duration-100 animate__animated animate__zoomIn animate__faster" x-transition>
+    <div x-data="{ currentView: 'all' }" class="p-5 flex flex-col items-center justify-center">
+      <div x-show="currentView == 'all'" class="transition flex flex-col items-center justify-center">
+        <table id="usersTable" align="center" cellpadding="5" class="flex-1 dark:text-white text-black">
+            <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome utente</th>
+                    <th>Nome</th>
+                    <th>Ruolo</th>
+                    <th>Azioni</th>
+                  </tr>
+                </thead>
+          </table>
+          <button title = "Aggiungi account" @click="currentView = 'create'">➕</button>
+      </div>
+
+      <div x-show="currentView == 'create'">
+        <form class="flex flex-col max-w-20 justify-center items-center" method="post" action="http://localhost:8083/users/add">
+          <input id="name" type="text" name="name" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Nome" required>
+          <input id="surname" type="text" name="surname" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Cognome" required>
+          <select id="role" name="role" class="border-2 rounded-lg px-1 mt-1 w-full" required>
+            <option selected disabled>Ruolo</option>
+            <option value="Admin">Amministratore</option>
+            <option value="Doc">Docente</option>
+            <option value="Stud">Studente</option>
+          </select>
+          <input id="user" type="text" name="user" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Username" required onchange="checkUser(this)">
+          <input id="pw" type="password" name="pw" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Password" required>
+          <input id="confpw" type="password" name="confpw" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Conferma password" required onchange="checkPW(this)">
+          <button id="back" type="button" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto" @click="currentView = 'all'">
+            Torna indietro
+          </button>
+          <button id="submit" type="submit" name="submit" onclick="add(this)" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto">
+            Aggiungi
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+<script>
+    const pw1 = document.querySelector('#pw')
+    const pw2 = document.querySelector('#confpw')
+
+    function checkPW(e) {
+      $('#submit').prop('disabled', pw1.value != pw2.value);
+
+      if (pw1.value != pw2.value)
+        pw2.classList.add('!border-red-500')
+      else
+        pw2.classList.remove('!border-red-500')
+    }
+
+    fetch('http://localhost:8083/users').then(res => {
+      res.json().then(users => {
+        document.getElementById("usersTable").innerHTML += '<tbody class="flex-1">'
+        for(var i = 0; i < users.length; i++){
+          if(users[i].role == "doc")
+            var ruolo = "Docente"
+          else if(users[i].role == "stud")
+            var ruolo = "Studente"
+          else if(users[i].role == "admin")
+            var ruolo = "Amministratore"
+
+          // alert(utenti.utenti[i].user)
+          document.getElementById("usersTable").innerHTML += 
+            '<tr>' +
+              '<td id="id' + (i+1) + '">' + 
+                users[i].id + 
+              '</td>' + 
+              '<td id="utente' + (i+1) +'">' +
+                users[i].user +
+              '</td>' +
+              '<td id="name' + (i+1) + '">' + 
+                users[i].name + 
+              '</td>' + 
+              '<td id="name' + (i+1) + '">' + 
+                ruolo + 
+              '</td>' + 
+              '<td>' +
+                  '<button title = "Elimina account" onclick = "del(this, ' + users[i].id + ')"> ❌ </button> ' + 
+                  '<button title = "Modifica password" onclick = "edit(this, ' + users[i].id + ')"> ✏️ </button> ' + 
+              '</td>' +
+            '</tr>'
+        }
+        document.getElementById("usersTable").innerHTML += '</tbody>'
+      })
+    })
+</script>
+</html>

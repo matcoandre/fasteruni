@@ -1,0 +1,16 @@
+{
+    "utenti": [
+        {
+            "user": "admin",
+            "password": "password"
+        },
+        {
+            "user": "studente",
+            "password": "password"
+        },
+        {
+            "user": "docente",
+            "password": "password"
+        }
+    ]
+}

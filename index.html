@@ -1,0 +1,173 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    FasterUni
+  </title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="js/script.js"></script>
+
+  <link rel="icon" type="image/png" href="./media/logos/app_colored.png">
+
+  <style type="text/tailwindcss">
+     @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      }
+
+      button
+      {
+        @apply mt-5 text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-36 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1
+      }
+
+      ::placeholder
+      {
+        @apply text-center dark:text-black text-white
+      }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body id="background" class="min-h-screen h-full flex flex-col items-center justify-center bg-cover" background="./media/1.jpg">
+  <main class="max-w-lg w-full shadow-xl drop-shadow-xl rounded-xl bg-white dark:bg-neutral-900 duration-100 animate__animated animate__zoomIn animate__faster" x-transition>
+    <div x-data="{ currentView: 'all' }" class="p-10 flex flex-col items-center justify-center">
+      <div x-show="currentView == 'all'" class="transition flex flex-col items-center justify-center">
+        <img src="media/logos/fasteruni_white_cut.png" class="w-40 mb-5 hidden dark:inline-block">
+        <img src="media/logos/fasteruni_black_cut.png" class="w-40 mb-5 dark:hidden">
+        <h1 id="cheer" class="text-2xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">
+          <!-- Gestito dalla funzione JS/jQuery -->
+        </h1>
+        <h3 class="text-xl dark:text-neutral-300 text-neutral-600">
+          Accedi per continuare
+        </h3>
+        <!-- <div class="flex flex-grow space-x-4">
+          <button @click="currentView = 'login'">
+            Accedi
+          </button>
+          <button @click="currentView = 'register'">
+            Registrati
+          </button>
+        </div>
+      </div>
+
+
+
+      <div x-show="currentView == 'login'" class=""> -->
+
+        <!-- <h1 class="text-3xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">
+          Accedi
+        </h1> -->
+        <form id="login" class="flex flex-col" onsubmit="return event.preventDefault()">
+          <div class="space-y-2 items-center justify-center flex flex-col text-xl">
+            <input id="user" type="text" name="email" class="border-slate-500 rounded-lg px-1 mt-2" placeholder="Nome utente" required>
+            <input id="pw" type="password" name="pw" class="border-slate-500 rounded-lg px-1 mt-1" placeholder="Password" required>
+          </div>
+          <div class="flex flex-grow items-center justify-center space-x-2">
+
+            <button id="submit" type="submit" name="submit" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto" onclick="pasuser(this.form)">
+              Accedi
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+      <!-- REGISTER -->
+      
+      <!-- <div x-show="currentView == 'register'" class="">
+
+        <h1 class="text-2xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">
+          Registrati
+        </h1>
+        <h3 class="text-xl dark:text-neutral-300 text-neutral-600 text-center">
+          Inserisci i dati richiesti per continuare.
+        </h3>
+        <form class="flex flex-col max-w-20 justify-center items-center" method="post" action="http://localhost:8080/users/add">
+          <input id="name" type="text" name="name" class="border-2 rounded-lg px-1 mt-2 w-full" placeholder="Nome" required>
+          <input id="surname" type="text" name="surname" class="border-2 rounded-lg px-1 mt-2 w-full" placeholder="Cognome" required>
+          <select id="role" class="border-2 rounded-lg px-1 mt-2 w-full" required>
+            <option selected disabled>Chi sei?</option>
+            <option>Studente</option>
+            <option>Insegnante</option>
+          </select>
+          <input id="matr" type="number" name="matr" class="border-2 rounded-lg px-1 mt-2 w-full" placeholder="Numero matricola" required>
+          <select id="course" class="border-2 rounded-lg px-1 mt-2 w-full" required>
+            <option selected disabled>Seleziona un corso...</option>
+            <option>Giurisprudenza</option>
+            <option>Ingegneria informatica</option>
+            <option>Scienze e tecnologie multimediali</option>
+          </select>
+          <input id="user" type="email" name="email" class="border-2 rounded-lg px-1 mt-2 w-full" placeholder="Indirizzo email" required>
+          <input id="pw" type="password" name="pw" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Password" required>
+          <input id="confpw" type="password" name="confpw" class="border-2 rounded-lg px-1 mt-1 w-full" placeholder="Conferma password" required>
+          <button id="back" type="button" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto" @click="currentView = 'all'">
+            Torna indietro
+          </button>
+          <button id="submit" type="submit" name="submit" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto">
+            Registrati
+          </button>
+        </form>
+      </div> -->
+    </div>
+  </main>
+  <footer>
+    <img src="media/logos/xenodev_round_white.png">
+  </footer>
+</body>
+<script>
+  // $( "#role" )
+  // .change(function () {
+  //   var str = "";
+  //   $( "#role option:selected" ).each(function() {
+  //     if (this.text == "Chi sei?")
+  //     {
+  //       $("#matr").hide()
+  //     }
+  //     else
+  //     {
+  //       $("#matr").show() 
+  //       str += $( this ).text() + " "
+  //     }
+  //   });
+  //   $( "#matr" ).attr("placeholder", ("ID " + str));
+  // })
+  // .change();
+
+  const d = new Date();
+  const hour = d.getHours();
+
+  if (hour >= 18 || hour < 0)
+    $("#cheer").text("Buonasera! 👋🏻")
+  else if (hour >= 6 && hour < 12)
+    $("#cheer").text("Buongiorno! ☀️")
+  else if (hour >= 12 && hour < 18)
+    $("#cheer").text("Buon pomeriggio! 👋🏻")
+  else
+    $("#cheer").text("Buonanotte! 😴")
+</script>
+</html>

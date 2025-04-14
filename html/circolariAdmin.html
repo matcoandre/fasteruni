@@ -1,0 +1,132 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>
+        Valutazioni - Docente
+      </title>
+
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+      <script src="../js/script.js"></script>
+      <script src="../js/html2pdf.bundle.min.js"></script>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+
+      <link rel="icon" type="image/png" href="../media/logos/app_colored.png">
+
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+	  
+      #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 70px;
+        font-size: 17px;
+      }
+
+      #snackbar.show 
+      {
+      visibility: visible;
+      -webkit-animation: fadein 1.0s, fadeout 1.0s 4.0s;
+      animation: fadein 1.0s, fadeout 1.0s 4.0s;
+        }
+
+      @-webkit-keyframes fadein 
+      {
+      from {bottom: 0; opacity: 0;} 
+      to {bottom: 70px; opacity: 1;}
+      }
+
+      @keyframes fadein 
+      {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 70px; opacity: 1;}
+      }
+
+      @-webkit-keyframes fadeout 
+      {
+      from {bottom: 70px; opacity: 1;} 
+      to {bottom: 0; opacity: 0;}
+      }
+
+      @keyframes fadeout 
+      {
+      from {bottom: 70px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+      }
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      }
+
+      button
+      {
+        @apply mt-5 text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-36 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1 placeholder-white
+      }
+
+      ::placeholder
+      {
+        @apply text-center
+      }
+      </style>
+  </head>
+  <body class="min-h-screen h-full flex flex-col items-center justify-center bg-cover" background="../media/1.jpg">
+    <main class="flex flex-col items-center justify-center bg-white dark:bg-neutral-900 dark:text-white p-2 rounded-lg">
+      <h1 class="mb-4 text-2xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">Inserisci comunicazioni</h1>
+      <section class="flex flex-grow items-center justify-center space-x-2">
+        <div id="editor">
+            <div id="content" class="text-center border border-light p-5">
+                <!-- Full Name -->
+                <div class="div-group row">
+                    <label class="col-sm-2 col-form-label">Oggetto</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputFullName" placeholder="Full Name" required>
+                    </div>
+                </div>
+                <button id="cmd" class="btn btn-info my-4 btn-block"  onclick="convert()">Send</button>
+            </div>
+        </div>
+      </section>
+	  <div id = "snackbar"></div>
+    </main>
+    <footer>
+      <img src="../media/logos/xenodev_round_white.png">
+    </footer>
+  </body>
+  <script>
+    function convert(){
+      const element = document.getElementById("content")
+      html2pdf().set({ html2canvas: { scale: 4 } }).from(element).save();
+    }
+  </script>
+</html>

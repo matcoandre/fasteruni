@@ -1,0 +1,91 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="http://www.fasteruni.tk/html/media/logos/app_colored.png">
+
+  <title>
+    Aggiungi account - Admin
+  </title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="../js/script.js"></script>
+
+  <style type="text/tailwindcss">
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      }
+
+      button
+      {
+        @apply mt-5 text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-36 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1 placeholder-white
+      }
+
+      ::placeholder
+      {
+        @apply text-center
+      }
+  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body id="background" class="min-h-screen h-full flex flex-col items-center justify-center bg-cover" background="../media/8.jpg">
+  <main class="max-w-lg w-full shadow-xl drop-shadow-xl rounded-xl bg-white dark:bg-neutral-900 duration-100 animate__animated animate__zoomIn animate__faster" x-transition>
+    <div x-data="{ currentView: 'all' }" class="p-10 flex flex-col items-center justify-center">
+      <div x-show="currentView == 'all'" class="transition flex flex-col items-center justify-center">
+        <h1 class="text-3xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">
+          Crea account
+        </h1>
+        <div class="flex flex-col">
+          <div class="space-y-2 items-center justify-center flex flex-col text-xl">
+            <input id="user" type="username" name="user" placeholder="Nome utente" required="">
+            <input id="pw" type="password" name="pw" placeholder="Password" required="">
+          </div>
+          <div class="flex flex-grow items-center justify-center space-x-2">
+            <button id="back" type="button" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto" onclick="">
+              Torna indietro
+            </button>
+            <button id="submit" type="submit" name="submit" class="border-2 rounded-lg px-1 mt-4 min-w-max w-40 mx-auto" @click="currentView = 'creation'" onclick="makeid(8)">
+              Crea codice
+            </button>
+          </div>
+        </div>
+      </div>
+    
+      <div id="code" x-show="currentView == 'creation' class="items-center justify-center flex flex-auto">
+        <h1 class="text-3xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">
+          Il tuo codice utente è: 
+        </h1>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <img src="../media/logos/xenodev_round_white.png">
+  </footer>
+  <script>
+    makeid(8)
+  </script>
+</body></html>
+

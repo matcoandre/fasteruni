@@ -1,0 +1,107 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Home - FasterUni
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="icon" type="image/png" href="../media/logos/app_colored.png">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      }
+
+      button
+      {
+        @apply mt-5 text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-36 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1 placeholder-white
+      }
+
+      ::placeholder
+      {
+        @apply text-center
+      }
+    </style>
+  </head>
+  <body class="min-h-screen h-full flex flex-grow items-center justify-center space-x-2 bg-cover" background="../media/1.jpg">
+    <div class="flex flex-col p-10 bg-white dark:bg-neutral-900 h-full space-y-5 rounded-xl">
+      <div class="flex flex-wrap items-center space-x-3">
+        <img src="../media/logos/app_white.png" class="w-10 h-10 hidden dark:inline-block">
+        <img src="../media/logos/app_black.png" class="w-10 h-10 visible dark:hidden">
+        
+        <h1 class="dark:text-neutral-100 text-neutral-900 font-extrabold text-2xl">
+          Menù principale
+        </h1>
+      </div>
+      <a href="valutazioniStud.html">
+        <h3 class="dark:text-neutral-100 text-neutral-900 transform hover:scale-105 transition-all text-lg">
+        Valutazioni
+        </h3>
+      </a>
+
+      <!-- <p class="dark:text-zinc-400 text-neutral-900">Qui potrai controllare le tue valutazioni durante il corso dell'anno.</p> -->
+
+      <a href="materialeStud.html">
+        <h3 class="dark:text-neutral-100 text-neutral-900 transform hover:scale-105 transition-all text-lg">
+          Materiale
+        </h3>
+      </a>
+
+      <!-- <p class="dark:text-zinc-400 text-neutral-900">Qui i tuoi docenti inseriranno tutto il materiale riguardante gli argomenti trattati a lezione.</p> -->
+      
+      <a href="lezioniStud.html">
+        <h3 class="dark:text-neutral-100 text-neutral-900 transform hover:scale-105 transition-all text-lg">
+          Lezioni
+        </h3>
+      </a>
+
+      <!-- <p class="dark:text-zinc-400 text-neutral-900">Troverai una lista dove riporterà tutte le ore di lezione durante il corso dell'anno.</p> -->
+
+      <!-- <a href="comunicazioniStud.html"> -->
+        <h3 class="dark:text-neutral-100 text-neutral-900 transform hover:scale-105 transition-all text-lg" onclick="alert('Funzione in sviluppo!')">
+          Comunicazioni
+        </h3>
+      <!-- </a> -->
+
+      <!-- <p class="dark:text-zinc-400 text-neutral-900">Controlla tutti gli avvisi pubblicati dalla segreteria.</p>  -->
+
+      <!-- <a href="prenotaStud.html"> -->
+        <h3 class="dark:text-neutral-100 text-neutral-900 transform hover:scale-105 transition-all text-lg" onclick="alert('Funzione in sviluppo!')">
+          Prenota esame
+        </h3>
+      <!-- </a> -->
+
+      <!-- <p class="dark:text-zinc-400 text-neutral-900">Qui avrai la possibilità di prenotare i vari esami che dovrai svolgere durante il tuo percorso formativo.</p> -->
+    </div>
+    <footer>
+      <img src="../media/logos/xenodev_round_white.png">
+    </footer>
+  </body>
+</html>

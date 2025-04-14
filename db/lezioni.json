@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "role": "Admin",
+        "name": "Armando Angurioni",
+        "user": "admin",
+        "password": "password"
+    },
+    {
+        "id": 2,
+        "role": "Stud",
+        "name": "Studente Studioso",
+        "user": "studente",
+        "password": "password"
+    },
+    {
+        "id": 3,
+        "role": "Doc",
+        "name": "John Appleseed",
+        "user": "docente",
+        "password": "password"
+    },
+    {
+        "id": 4,
+        "role": "Stud",
+        "name": "Stefano Lavori",
+        "user": "steve",
+        "password": "password"
+    }
+]

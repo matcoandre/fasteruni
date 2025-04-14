@@ -1,0 +1,187 @@
+<!-- FasterUni - © 2022 -->
+<!-- An intuitive and easy to use 
+management engine for your university -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>
+        Materiali/dispense - Studente
+      </title>
+
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+      <link rel="icon" type="image/png" href="../media/logos/app_colored.png">
+
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      body
+      {
+        font-family: 'Lato', sans-serif;
+      }
+
+      footer
+      {
+        position: fixed;
+        left: auto;
+        bottom: 20px;
+        width: 10%;
+        @apply flex justify-center
+      }
+
+      button
+      {
+        @apply mt-5 text-center dark:text-neutral-200 text-neutral-700 font-light text-xl border-2 rounded-lg max-w-lg w-36 flex-1 border-neutral-200 dark:border-neutral-700 hover:scale-105 transform transition-all;
+      }
+
+      input, select{
+        @apply border-2 dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 mt-1 placeholder-white
+      }
+
+      ::placeholder
+      {
+        @apply text-center
+      }
+      </style>
+  </head>
+  <body class="min-h-screen h-full flex flex-col items-center justify-center bg-cover" background="../media/1.jpg">
+    <main class="flex flex-col bg-white dark:bg-neutral-900 dark:text-white p-2 rounded-lg">
+      <h1 class="mb-4 text-2xl font-semibold dark:text-neutral-100 text-neutral-900 text-center">Materiali caricati</h1>
+      <select id="insegnante" class="dark:border-neutral-800 bg-white dark:bg-neutral-700 dark:text-white rounded-lg px-1 placeholder-white" required>
+        <option selected disabled>Seleziona un docente...</option>
+        <option>Paolo Rossi</option>
+        <option>Sandra Giovannardi</option>
+        <option>Ezio Lenon</option>
+      </select>
+      <table id="tabellaMaterialePangos" align="center" cellpadding="20" class="flex-1">
+        <thead>
+          <tr>
+            <th>Descrizione</th>
+            <th>Data Inserimento</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr id="pangos">
+            <td>
+                <a href="../media/Decalogo_anti_piccone.pdf">
+                  Decalogo anti "piccone"
+                </a>   
+            </td>
+            <td>12/12/2012</td>  
+          </tr>
+        </tbody>
+      </table>
+      <table id="tabellaMaterialeSattolo" align="center" cellpadding="20" class="flex-1">
+            <thead>
+                  <tr>
+                    <th>Descrizione</th>
+                    <th>Data Inserimento</th>
+                  </tr>
+                  
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                        <a href="../media/sus.pdf">
+                          Immagine S.O. a "Buccia di Cipolla"
+                        </a>
+                    </td>
+                    <td>02/02/2022</td>  
+                  </tr>
+    
+                  <tr>
+                    <td>
+                        <a href="../media/USB _ Sutori.pdf">
+                          Argomenti della verrifica
+                        </a>
+                    </td>
+                    <td>15/02/2022</td>  
+                  </tr>
+    
+                  <tr>
+                    <td>
+                        <a href="../media/test-di-stampa-nero.pdf">
+                          1,2 Cap: da sapere tutto!!!!!!!!!
+                        </a>
+                    </td>
+                    <td>18/02/2022</td>  
+                  </tr>
+                </tbody>
+              </table>
+              <table id="tabellaMaterialeLicinio" align="center" cellpadding="20" class="flex-1">
+                <thead>
+                      <tr>
+                        <th>Descrizione</th>
+                        <th>Data Inserimento</th>
+                      </tr>
+                      
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td> 
+                          <a href="../media/amogus.pdf">
+                            Materiale principio di reciprocità
+                          </a>
+                        </td>
+                        <td>03/03/2023</td>
+                      </tr>
+        
+                      <tr>
+                        <td> 
+                          <a href="../media/GeneralitàSOPocessi.pdf">
+                            Esercizi sui vettori
+                          </a>
+                        </td>
+                        <td>03/03/2023</td>
+                      </tr>
+        
+                    </tbody>
+              </table>
+    </main>
+    </main>
+    <footer>
+      <img src="../media/logos/xenodev_round_white.png">
+    </footer>
+  </body>
+  <script>
+
+    // INSEGNANTE SHOW
+    $( "#insegnante" )
+      .change(function () {
+      var str = "";
+      $( "#insegnante option:selected" ).each(function() {
+        if (this.text == "Seleziona un docente...")
+        {
+          $("#tabellaMaterialeSattolo").hide()
+          $("#tabellaMaterialePangos").hide()
+          $("#tabellaMaterialeLicinio").hide()
+        }
+        else
+        { 
+          if(this.text == "Paolo Rossi"){
+            $("#tabellaMaterialeSattolo").hide()
+            $("#tabellaMaterialePangos").show()
+            $("#tabellaMaterialeLicinio").hide()
+          } else if(this.text == "Sandra Giovannardi"){
+            $("#tabellaMaterialeSattolo").show()
+            $("#tabellaMaterialePangos").hide()
+            $("#tabellaMaterialeLicinio").hide()
+          } else if(this.text == "Ezio Lenon"){
+            $("#tabellaMaterialeSattolo").hide()
+            $("#tabellaMaterialePangos").hide()
+            $("#tabellaMaterialeLicinio").show()
+          }
+        }
+      });
+    })
+    .change();
+ 
+  </script>
+</html>
